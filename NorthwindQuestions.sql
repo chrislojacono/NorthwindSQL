@@ -16,3 +16,9 @@ from Products p
 		on c.CategoryID = p.CategoryID
 group by c.CategoryName 
 order by revenue desc
+
+select o.OrderID, o.OrderDate, sum(od.Quantity * od.UnitPrice * (1 - Discount)) as OrderPrice
+from Orders o
+	Join [Order Details] OD
+	on od.OrderID = o.OrderID
+group by o.OrderID, o.OrderDate
