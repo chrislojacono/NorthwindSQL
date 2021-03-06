@@ -6,3 +6,13 @@ from Orders o
 select * 
 from Products p
 where p.Discontinued = 0
+
+
+select c.CategoryName, sum(od.UnitPrice * Quantity  * (1-Discount)) as revenue, count(od.Quantity) as AmountSold
+from Products p
+	join [Order Details] od 
+		on p.ProductID = od.ProductID
+	join Categories c
+		on c.CategoryID = p.CategoryID
+group by c.CategoryName 
+order by revenue desc
